@@ -11,7 +11,30 @@ var sf = {latitude: 37.783333, longitude: -122.416667};
 var nyc = {latitude: 40.664167, longitude: -73.938611};
 var syd = {latitude: -33.859972, longitude: 151.211111};
 
+var assertAssertion = function(f) {
+  var err = null;
+  try {
+    f();
+  } catch(caught) {
+    err = caught;
+  }
+  if (!err || err.name !== 'AssertionError') {
+    assert.fail(err ? err.name : '', 'AssertionError');
+  }
+};
+
 describe('Haversine', function() {
+  it('should require correct lat/lng inputs', function() {
+    assertAssertion(function() { haversine(); });
+    assertAssertion(function() { haversine({}); });
+    assertAssertion(function() { haversine({}, {}); });
+    haversine(sf, nyc);
+    haversine(
+      {lat: sf.latitude, lng: sf.longitude},
+      {lat: nyc.latitude, lng: nyc.longitude}
+    );
+  });
+
   it('should return zero when start equals end', function() {
     var point = {latitude: 54.321, longitude: 123.45};
     assert.strictEqual(haversine(point, point), 0);
@@ -25,16 +48,7 @@ describe('Haversine', function() {
     haversine(sf, nyc);
     haversine(sf, nyc, 'miles');
     haversine(sf, nyc, 'km');
-
-    var err = null;
-    try {
-      haversine(sf, nyc, 'foobars');
-    } catch(caught) {
-      err = caught;
-    }
-    if (!err || err.name !== 'AssertionError') {
-      assert.fail('', 'AssertionError');
-    }
+    assertAssertion(function() { haversine(sf, nyc, 'foobars'); });
   });
 
   it('should use miles by default', function() {
