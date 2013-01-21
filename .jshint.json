@@ -5,6 +5,14 @@
   "latedef": true,
   "maxlen": 80,
   "node": true,
+  "predef": {
+    "describe": false,
+    "it": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false
+  },
   "quotmark": "single",
   "trailing": true,
   "undef": true,

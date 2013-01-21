@@ -4,13 +4,16 @@
   "description": "A simple haversine module",
   "main": "haversine.js",
   "devDependencies": {
-    "jshint": "0.9.x"
+    "jshint": "0.9.x",
+    "mocha": "1.8.x"
   },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/jshint --config='./.jshint.json' haversine.js test/; exit 0"
+    "lint": "./node_modules/.bin/jshint --config='./.jshint.json' haversine.js test/; exit 0",
+    "pretest": "npm run-script lint",
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
