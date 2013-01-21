@@ -1,27 +1,12 @@
 # Haversine
-A simple haversine formula module for Node.js
-
-I created this small module for an application I created and figured I would package it up to share.
-
-## Installation
-`$ npm install haversine`
-
-## Usage
-### haversine(start, end, options)
 
     var haversine = require('haversine')
 
-    start = {
-      latitude: 10,
-      longitude: 11
-    }
-    end = {
-      latitude: 11,
-      longitude: 10
-    }
+    var distance = haversine(
+      {latitude: 12, longitude: 34},
+      {latitude: 23, longitude: 45}
+    );
 
-    console.log(haversine(start, stop))
-    console.log(haversine(start, stop, {unit: 'km'}))
+    var distance2 = haversine({lat: 34, lng: 45}, {lat: 56, lng: 67});
 
-## Future
-I plan on adding more options soon including a threshold check.
+    var distance2 = haversine({lat: 34, lng: 45}, {lat: 56, lng: 67}, 'km');

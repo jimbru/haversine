@@ -1,7 +1,7 @@
 {
   "name": "haversine",
-  "version": "0.0.1",
-  "description": "Module to calculate haversine distances.",
+  "version": "0.1.0",
+  "description": "Module to calculate haversine distances on Earth.",
   "keywords": [
     "haversine",
     "distance",
