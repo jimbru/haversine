@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "description": "A simple haversine module",
   "main": "haversine.js",
+  "devDependencies": {
+    "jshint": "0.9.x"
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./test/test.js"
+    "lint": "./node_modules/.bin/jshint --config='./.jshint.json' haversine.js test/; exit 0"
   },
   "repository": {
     "type": "git",
