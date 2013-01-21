@@ -21,17 +21,33 @@ describe('Haversine', function() {
     assert.strictEqual(haversine(sf, nyc), haversine(nyc, sf));
   });
 
+  it('should allow only miles or kilometers', function() {
+    haversine(sf, nyc);
+    haversine(sf, nyc, 'miles');
+    haversine(sf, nyc, 'km');
+
+    var err = null;
+    try {
+      haversine(sf, nyc, 'foobars');
+    } catch(caught) {
+      err = caught;
+    }
+    if (!err || err.name !== 'AssertionError') {
+      assert.fail('', 'AssertionError');
+    }
+  });
+
   it('should use miles by default', function() {
-    assert.strictEqual(haversine(sf, nyc), haversine(sf, nyc, {unit: 'mile'}));
+    assert.strictEqual(haversine(sf, nyc), haversine(sf, nyc, 'miles'));
   });
 
   it('should return the correct distance from SF to NYC', function() {
     assert.strictEqual(Math.floor(haversine(sf, nyc)), 2570);
-    assert.strictEqual(Math.floor(haversine(sf, nyc, {unit: 'km'})), 4135);
+    assert.strictEqual(Math.floor(haversine(sf, nyc, 'km')), 4135);
   });
 
   it('should return the correct distance from SF to SYD', function() {
     assert.strictEqual(Math.floor(haversine(sf, syd)), 7426);
-    assert.strictEqual(Math.floor(haversine(sf, syd, {unit: 'km'})), 11947);
+    assert.strictEqual(Math.floor(haversine(sf, syd, 'km')), 11947);
   });
 });

@@ -1,5 +1,7 @@
 'use strict';
 
+var assert = require('assert');
+
 /**
  * Convert degrees to radians.
  */
@@ -10,12 +12,16 @@ var toRad = function(n) {
 /**
  * Haversine.
  */
-module.exports = function(start, end, options) {
+module.exports = function(start, end, units) {
+  assert(
+    units === undefined || units === 'miles' || units === 'km',
+    'Only miles and kilometers are supported (not ' + units + ').'
+  );
+
   var miles = 3960;
   var km    = 6371;
-  options   = options || {};
 
-  var R = options.unit === 'km' ? km : miles;
+  var R = (units === 'km') ? km : miles;
 
   var dLat = toRad(end.latitude - start.latitude);
   var dLon = toRad(end.longitude - start.longitude);
