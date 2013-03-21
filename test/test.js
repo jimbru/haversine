@@ -10,6 +10,7 @@ var haversine = require('../haversine');
 var sf = {latitude: 37.783333, longitude: -122.416667};
 var nyc = {latitude: 40.664167, longitude: -73.938611};
 var syd = {latitude: -33.859972, longitude: 151.211111};
+var empty = {latitude: null, longitude: null};
 
 var assertAssertion = function(f) {
   var err = null;
@@ -33,6 +34,12 @@ describe('Haversine', function() {
       {lat: sf.latitude, lng: sf.longitude},
       {lat: nyc.latitude, lng: nyc.longitude}
     );
+  });
+
+  it('should not assert failure because keys exist', function() {
+    haversine(sf, empty);
+    haversine(empty, sf);
+    haversine(empty, empty);
   });
 
   it('should return zero when start equals end', function() {
