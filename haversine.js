@@ -12,6 +12,14 @@ var degToRad = function(n) {
   return n * Math.PI / 180;
 };
 
+
+function keysExist(coord) {
+  return (
+    coord.hasOwnProperty('latitude') && coord.hasOwnProperty('longitude')) ||
+    (coord.hasOwnProperty('lat') && coord.hasOwnProperty('lng')
+  );
+}
+
 /**
  * Haversine.
  */
@@ -22,11 +30,11 @@ module.exports = function(start, end, units) {
   );
   assert(start && end, 'Start and end parameters are required.');
   assert(
-    (start.latitude && start.longitude) || (start.lat && start.lng),
+    keysExist(start),
     'Start must have keys latitude/longitude or lat/lng.'
   );
   assert(
-    (end.latitude && end.longitude) || (end.lat && end.lng),
+    keysExist(end),
     'End must have keys latitude/longitude or lat/lng.'
   );
 
